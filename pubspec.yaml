@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  dio:
   tflite: ^1.1.2
   image_picker: ^0.8.4+5
   camera: ^0.9.4+9

@@ -7,14 +7,14 @@ import 'package:tflite/tflite.dart';
 import 'package:visionary/screens/display_result/display_result.dart';
 import 'package:visionary/services/text_to_speech.dart';
 
-class ScanPage extends StatefulWidget {
-  const ScanPage({Key? key}) : super(key: key);
+class ImageCaptioningPage extends StatefulWidget {
+  const ImageCaptioningPage({Key? key}) : super(key: key);
 
   @override
-  State<ScanPage> createState() => _ScanPageState();
+  State<ImageCaptioningPage> createState() => _ImageCaptioningPageState();
 }
 
-class _ScanPageState extends State<ScanPage> {
+class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
   bool _loading = false;
   File? _image;
   List? _output;
@@ -93,7 +93,7 @@ class _ScanPageState extends State<ScanPage> {
                 primary: Colors.green,
               ),
               onPressed: () async {
-                TTS.speak('Picking Gallery Image to scan');
+                TTS.speak('Picking Gallery Image to caption it');
                 await pickGalleryImage();
                 Navigator.push(
                   context,
@@ -107,7 +107,7 @@ class _ScanPageState extends State<ScanPage> {
                 );
               },
               child: const Text(
-                "SELECT IMAGE TO SCAN",
+                "SELECT IMAGE TO CAPTION IMAGE",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
@@ -124,7 +124,7 @@ class _ScanPageState extends State<ScanPage> {
                 primary: Colors.green,
               ),
               onPressed: () async {
-                TTS.speak('Taking Image from Camera to scan');
+                TTS.speak('Taking Image from Camera to Caption Image');
                 await pickImage();
                 Navigator.push(
                   context,
@@ -138,7 +138,7 @@ class _ScanPageState extends State<ScanPage> {
                 );
               },
               child: const Text(
-                "TAKE AN IMAGE TO SCAN",
+                "TAKE AN IMAGE TO CAPTION IT",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
