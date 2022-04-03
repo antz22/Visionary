@@ -1,10 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
-import 'package:visionary/screens/display_result/display_result.dart';
+import 'package:visionary/screens/image_captioning/display_caption.dart';
 import 'package:visionary/services/text_to_speech.dart';
 
 class ImageCaptioningPage extends StatefulWidget {
@@ -19,12 +21,12 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
   List? _output;
   final picker = ImagePicker();
 
+  final String uploadUrl = "http://172.16.4.171:8000/api";
+  final String downloadUrl = "http://172.16.4.171:8000/result";
+
   @override
   void initState() {
     super.initState();
-    loadModel().then((value) {
-      setState(() {});
-    });
   }
 
   @override
@@ -33,20 +35,13 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
     Tflite.close();
   }
 
-  classifyImage(File? image) async {
-    var output = await Tflite.runModelOnImage(
-      path: image!.path,
-      // threhold: 0.0,
-      // imageMean: 0,
-    );
-    print(output);
+  uploadImage(File? image) async {
+    String base64Image = base64Encode(image!.readAsBytesSync());
+    Response response = await Dio().post(uploadUrl, data: base64Image);
+    print(response.data);
     setState(() {
-      _output = output;
+      _output = [response.data];
     });
-  }
-
-  loadModel() async {
-    await Tflite.loadModel(model: 'assets/models/model.tflite');
   }
 
   pickImage() async {
@@ -57,7 +52,7 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
       _image = File(image.path);
     });
 
-    await classifyImage(_image);
+    await uploadImage(_image);
   }
 
   pickGalleryImage() async {
@@ -68,7 +63,7 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
       _image = File(image.path);
     });
 
-    await classifyImage(_image);
+    await uploadImage(_image);
   }
 
   @override
@@ -96,10 +91,9 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DisplayResultPage(
+                    builder: (context) => DisplayCaptionPage(
                       output: _output,
                       image: _image,
-                      type: 'Image Captioning',
                     ),
                   ),
                 );
@@ -127,10 +121,9 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DisplayResultPage(
+                    builder: (context) => DisplayCaptionPage(
                       output: _output,
                       image: _image,
-                      type: 'Image Captioning',
                     ),
                   ),
                 );
