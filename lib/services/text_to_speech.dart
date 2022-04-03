@@ -7,7 +7,7 @@ class TTS {
     final TextEditingController controller =
         TextEditingController(text: speechText);
     tts.setLanguage('en');
-    tts.setSpeechRate(0.4);
+    tts.setSpeechRate(0.5);
     tts.speak(controller.text);
   }
 }

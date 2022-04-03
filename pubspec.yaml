@@ -21,6 +21,8 @@ dependencies:
 
   flutter_tts: ^3.3.3
 
+  simple_ocr_plugin: ^0.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

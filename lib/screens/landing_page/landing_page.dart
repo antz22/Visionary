@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:visionary/constants/constants.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:visionary/screens/read/read_page.dart';
+import 'package:visionary/screens/scan/scan_page.dart';
 import 'package:visionary/services/text_to_speech.dart';
-
-import '../home/home_page.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -19,34 +19,98 @@ class LandingPage extends StatelessWidget {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(
               horizontal: 2 * kDefaultPadding,
-              vertical: 4 * kDefaultPadding,
+              vertical: 2 * kDefaultPadding,
             ),
             child: SvgPicture.asset('assets/images/logo.svg'),
           ),
           SizedBox(
-            width: 0.85 * MediaQuery.of(context).size.width, // <-- Your width
-            height: 0.6 * MediaQuery.of(context).size.height, // <-- Your height
+            width: 0.925 * MediaQuery.of(context).size.width, // <-- Your width
+            height: 0.3 * MediaQuery.of(context).size.height, // <-- Your height
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Colors.green,
               ),
               onPressed: () {
-                TTS.speak('Scanning');
+                TTS.speak(
+                    'Scanning to read. Click left side to select image from photo gallery, click right side to take photo with camera.');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HomePage(),
+                    builder: (context) => ReadPage(),
                   ),
                 );
               },
               child: const Text(
-                "Tap to Scan",
+                "Tap to Read",
                 style: TextStyle(
                   fontSize: 30,
                 ),
               ),
             ),
           ),
+          SizedBox(height: 0.025 * MediaQuery.of(context).size.width),
+          Row(children: [
+            SizedBox(
+              width: 0.0375 * MediaQuery.of(context).size.width,
+            ),
+            SizedBox(
+              width: 0.45 * MediaQuery.of(context).size.width, // <-- Your width
+              height:
+                  0.4 * MediaQuery.of(context).size.height, // <-- Your height
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                ),
+                onPressed: () {
+                  TTS.speak(
+                      'Object detection. Click left side to select image from photo gallery, click right side to take photo with camera.');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ScanPage(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Tap to Identify Objects",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 0.025 * MediaQuery.of(context).size.width,
+            ),
+            SizedBox(
+              width: 0.45 * MediaQuery.of(context).size.width, // <-- Your width
+              height:
+                  0.4 * MediaQuery.of(context).size.height, // <-- Your height
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                ),
+                onPressed: () {
+                  TTS.speak(
+                      'Scene captioning. Click left side to select image from photo gallery, click right side to take photo with camera.');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ScanPage(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Tap to Caption Scene",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            )
+          ]),
         ],
       ),
     );
