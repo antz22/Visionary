@@ -24,6 +24,8 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
 
   final String uploadUrl = "http://172.16.4.171:8000/api";
   final String downloadUrl = "http://172.16.4.171:8000/result";
+  // final String uploadUrl = "https://visionary-hacks.herokuapp.com/api";
+  // final String downloadUrl = "http://visionary-hacks.herokuapp.com/result";
 
   @override
   void initState() {

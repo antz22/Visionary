@@ -1,6 +1,0 @@
-io/que/simple_ocr_plugin/BuildConfig.java
- io.que.simple_ocr_plugin.BuildConfig
-io/que/simple_ocr_plugin/SimpleOcrPlugin.java
- io.que.simple_ocr_plugin.SimpleOcrPlugin
- io.que.simple_ocr_plugin.SimpleOcrPlugin$1
- io.que.simple_ocr_plugin.SimpleOcrPlugin$2
