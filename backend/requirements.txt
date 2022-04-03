@@ -1,5 +1,0 @@
-Flask==2.0.3
-keras==2.8.0
-Keras-Preprocessing==1.1.2
-numpy==1.22.3
-Pillow==9.0.1
