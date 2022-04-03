@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
-import 'package:visionary/screens/image_captioning/display_caption.dart';
+import 'package:visionary/screens/display_caption/display_caption.dart';
 import 'package:visionary/services/text_to_speech.dart';
 
 class ImageCaptioningPage extends StatefulWidget {
@@ -57,6 +57,8 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
       loading = true;
     });
 
+    TTS.speak('Loading');
+
     await uploadImage(_image);
   }
 
@@ -68,6 +70,8 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
       _image = File(image.path);
       loading = true;
     });
+
+    TTS.speak('Loading');
 
     await uploadImage(_image);
   }

@@ -6,8 +6,20 @@ import 'package:visionary/screens/object_detection/object_detection.dart';
 import 'package:visionary/screens/read/read_page.dart';
 import 'package:visionary/services/text_to_speech.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
+
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  @override
+  void initState() {
+    super.initState();
+    TTS.speak(
+        'Touch top to read, touch bottom left to identify objects, touch bottom right to caption scene');
+  }
 
   @override
   Widget build(BuildContext context) {
