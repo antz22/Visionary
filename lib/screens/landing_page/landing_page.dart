@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visionary/constants/constants.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:visionary/screens/object_detection/object_detection.dart';
 import 'package:visionary/screens/read/read_page.dart';
 import 'package:visionary/screens/scan/scan_page.dart';
 import 'package:visionary/services/text_to_speech.dart';
@@ -67,7 +68,7 @@ class LandingPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ScanPage(),
+                      builder: (context) => ObjectDetectionPage(),
                     ),
                   );
                 },

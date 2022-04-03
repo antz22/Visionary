@@ -77,6 +77,7 @@ class _ReadPageState extends State<ReadPage> {
                     builder: (context) => DisplayResultPage(
                       output: _output,
                       image: _image,
+                      type: 'Read',
                     ),
                   ),
                 );
@@ -107,6 +108,7 @@ class _ReadPageState extends State<ReadPage> {
                     builder: (context) => DisplayResultPage(
                       output: _output,
                       image: _image,
+                      type: 'Read',
                     ),
                   ),
                 );

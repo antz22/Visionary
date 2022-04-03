@@ -34,6 +34,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/models/object_detection/ssd_mobilenet.tflite
+    - assets/models/object_detection/labels.txt
     - assets/models/
     - assets/images/
     

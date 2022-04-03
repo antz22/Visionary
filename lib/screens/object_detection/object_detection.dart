@@ -36,8 +36,13 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
         numResultsPerClass: 10, // defaults to 5
         asynch: true // defaults to true
         );
+    Set<dynamic> s = Set();
+    for (int i = 0; i < output!.length; i++) {
+      s.add(output[i]!['detectedClass']);
+    }
+    List<dynamic> result = s.toList();
     setState(() {
-      _output = output;
+      _output = result;
     });
   }
 
@@ -64,6 +69,20 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    loadTfModel().then((value) {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Tflite.close();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -85,12 +104,15 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
               onPressed: () async {
                 TTS.speak('Picking Gallery Image to Detect Objects');
                 await pickGalleryImage();
+                String objects = _output!.join(', ');
+                TTS.speak('Image contains ' + objects);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => DisplayResultPage(
                       output: _output,
                       image: _image,
+                      type: 'Object Detection',
                     ),
                   ),
                 );
@@ -115,12 +137,15 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
               onPressed: () async {
                 TTS.speak('Taking Image from Camera to Detect Objects');
                 await pickImage();
+                String objects = _output!.join(', ');
+                TTS.speak('Image contains ' + objects);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => DisplayResultPage(
                       output: _output,
                       image: _image,
+                      type: 'Object Detection',
                     ),
                   ),
                 );

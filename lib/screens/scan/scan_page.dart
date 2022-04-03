@@ -101,6 +101,7 @@ class _ScanPageState extends State<ScanPage> {
                     builder: (context) => DisplayResultPage(
                       output: _output,
                       image: _image,
+                      type: 'Image Captioning',
                     ),
                   ),
                 );
@@ -131,6 +132,7 @@ class _ScanPageState extends State<ScanPage> {
                     builder: (context) => DisplayResultPage(
                       output: _output,
                       image: _image,
+                      type: 'Image Captioning',
                     ),
                   ),
                 );
