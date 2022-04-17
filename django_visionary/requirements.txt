@@ -1,0 +1,7 @@
+django
+django-rest-framework
+tensorflow
+keras
+pillow
+pandas
+numpy

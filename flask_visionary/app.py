@@ -105,4 +105,5 @@ def sendImage():
     return send_file(static_dir+str(timestamp)+'.jpg', mimetype='image/gif')
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='172.16.4.171', port=8000)
+    

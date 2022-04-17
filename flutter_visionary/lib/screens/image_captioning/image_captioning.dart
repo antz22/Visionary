@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,9 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
   bool loading = false;
   final picker = ImagePicker();
 
-  final String uploadUrl = "http://172.16.4.171:8000/api";
-  final String downloadUrl = "http://172.16.4.171:8000/result";
+  final String uploadUrl = "http://172.16.4.171:8000/api/predict/";
+  // final String uploadUrl = "http://172.16.4.171:8000/api";
+  // final String downloadUrl = "http://172.16.4.171:8000/result";
   // final String uploadUrl = "https://visionary-hacks.herokuapp.com/api";
   // final String downloadUrl = "http://visionary-hacks.herokuapp.com/result";
 
@@ -40,10 +42,9 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
 
   uploadImage(File? image) async {
     String base64Image = base64Encode(image!.readAsBytesSync());
-    Response response = await Dio().post(uploadUrl, data: base64Image);
-    print(response.data);
-    String res = response.data.toString();
-    res = "${res[0].toUpperCase()}${res.substring(1).toLowerCase()}";
+    Response response =
+        await Dio().post(uploadUrl, data: {'image': base64Image});
+    String res = response.data['description'].toString();
     setState(() {
       _output = [res];
       loading = false;
