@@ -10,9 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 # models.py imports
-from .apps import CaptionerConfig
-# from .models import ExampleModel
-# from .serializers import ExampleModelSerializer
+from .apps import ModelConfig
 
 # ML imports
 from keras.preprocessing.text import Tokenizer
@@ -22,8 +20,10 @@ from keras.models import load_model
 from pickle import load
 import numpy as np
 from PIL import Image
-import base64, time, json, io
+import base64, time, json, io, os
 
+
+# functions for model prediction
 def extract_features(filename, model):
     try:
         image = Image.open(filename)
@@ -33,7 +33,7 @@ def extract_features(filename, model):
 
     image = image.resize((299,299))
     image = np.array(image)
-    # for images that has 4 channels, we convert them into 3 channels
+    # for images that have 4 channels, we convert them into 3 channels
     if image.shape[2] == 4: 
         image = image[..., :3]
     image = np.expand_dims(image, axis=0)
@@ -73,21 +73,27 @@ class predict(APIView):
             data = request.data
             image = data['image']
 
+            # upload image to media/uploads folder
             filename = "media/uploads/{}".format(time.time_ns()) + '.jpg'
             with open(filename, "wb") as fh:
                 fh.write(base64.b64decode(image))
 
+            # define model
             max_length = 32
             xception_model = Xception(include_top=False, pooling="avg")
 
             photo = extract_features(filename, xception_model)
 
-            description = generate_desc(CaptionerConfig.model, CaptionerConfig.tokenizer, photo, max_length)
+            # generate prediction
+            description = generate_desc(ModelConfig.model, ModelConfig.tokenizer, photo, max_length)
             description = description[6:-4]
 
             result = {
                 "description": description.capitalize(),
             }
+
+            # remove image from media/uploads
+            os.remove(filename)
 
             return Response(result, status=status.HTTP_200_OK)
 

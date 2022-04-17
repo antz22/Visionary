@@ -10,7 +10,7 @@ class CoreConfig(AppConfig):
     name = 'core'
 
 
-class CaptionerConfig(AppConfig):
+class ModelConfig(AppConfig):
     model_path = os.path.join(settings.MODELS_FOLDER, 'model.h5')
     tokenizer_path = os.path.join(settings.MODELS_FOLDER, 'tokenizer.p')
 
