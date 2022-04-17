@@ -1,7 +1,7 @@
 <br />
 
 <p align="middle">
-    <img src="https://github.com/antz22/Visionary/blob/master/logo.png" style="margin:0; padding: 0">
+    <img src="https://github.com/antz22/Visionary/blob/master/assets/logo.png" style="margin:0; padding: 0">
 </p>
 
 <br />
